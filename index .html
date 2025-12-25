@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Merry Christmas Khushi ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:#0f172a;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.container{
+    max-width:450px;
+    text-align:center;
+    padding:22px;
+    position:relative;
+    z-index:2;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:6px;
+}
+
+.sub{
+    font-size:18px;
+    color:#fde68a;
+    margin-bottom:15px;
+}
+
+.name{
+    font-size:24px;
+    color:#fda4af;
+    margin-bottom:18px;
+    animation: heartbeat 1.5s infinite, fade 3s infinite;
+}
+
+@keyframes fade{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+
+@keyframes heartbeat{
+    0%, 100% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+}
+
+.slider-box{
+    margin-top:25px;
+}
+
+input[type=range]{
+    width:100%;
+}
+
+.game{
+    display:none;
+    margin-top:28px;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:25px;
+    background:#fb7185;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+button:hover{
+    background:#f43f5e;
+}
+
+.message{
+    margin-top:22px;
+    font-size:17px;
+    line-height:1.6;
+    min-height:110px;
+}
+
+.tap-count{
+    margin-top:12px;
+    font-size:16px;
+    color:#fcd34d;
+}
+
+/* ❄️ Snow */
+.snowflake{
+    position:fixed;
+    top:-10px;
+    color:white;
+    font-size:14px;
+    opacity:0.8;
+    pointer-events:none;
+    z-index:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎄 Merry Christmas 🎄</h1>
+<div class="sub">Dil se, sirf tumhare liye 💖</div>
+
+<div class="name" id="name"></div>
+
+<div class="slider-box">
+    <p>Thoda slide karo… ✨</p>
+    <input type="range" min="0" max="100" value="0" id="slider">
+</div>
+
+<div class="game" id="game">
+    <p>🎁 Tap karo aur dil ki baat padho ❤️</p>
+    <button onclick="playGame()">Tap ❤️</button>
+    <div class="message" id="msg"></div>
+    <div class="tap-count" id="tapCount">Taps: 0</div>
+</div>
+
+</div>
+
+<script>
+/* Name animation */
+const names = [
+ "Khushi Madam Ji 💖",
+ "Meri Sabse Pyari Khushi 🌸",
+ "Sabr ka sabse khoobsurat fal ❤️"
+];
+
+let nameIndex = 0;
+const nameBox = document.getElementById("name");
+
+setInterval(()=>{
+    nameBox.innerText = names[nameIndex];
+    nameIndex = (nameIndex + 1) % names.length;
+},3000);
+
+/* Slider + game */
+const slider = document.getElementById("slider");
+const game = document.getElementById("game");
+const msg = document.getElementById("msg");
+const tapCountEl = document.getElementById("tapCount");
+
+let points = 0;
+let taps = 0;
+
+const messages = [
+ "Zindagi perfect ho ya na ho, par tumhari ek muskurahat sab kuch theek kar deti hai 😊",
+
+ "Tum shayad roz khud ko simple samajhti ho, par kisi ke liye tum uski sabse khaas dua ho ❤️",
+
+ "Intezaar mushkil hota hai, lekin jab wajah tum ho… toh sabr bhi pyaar lagta hai ✨",
+
+ "Tumhari khushi sirf tumhari nahi hoti, wo aas-paas sabko roshan kar deti hai 💖",
+
+ "Bas itna hi chahta hoon ki chahe kuch bhi ho, tumhara chehra hamesha muskurata rahe 🌸"
+];
+
+slider.oninput = () => {
+    if(slider.value >= 100){
+        game.style.display = "block";
+    }
+};
+
+function playGame(){
+    taps++;
+    tapCountEl.innerText = "Taps: " + taps;
+
+    if(points < messages.length){
+        msg.innerText = messages[points];
+        points++;
+    } else {
+        msg.innerHTML =
+        "🎄 Merry Christmas Khushi ❤️✨<br><br>" +
+        "Tumhari har muskurahat kisi ke liye bahut keemti hai,<br>" +
+        "Mujhe hamesha yaad rahegi ❤️<br>" +
+        "<span style='color:#fda4af; font-weight:bold;'>Khushi</span>, tum bahut special ho 💖<br>" +
+        "— Someone who truly cares 🌸";
+    }
+}
+
+/* ❄️ Snow animation */
+function createSnow(){
+    const snow = document.createElement("div");
+    snow.className = "snowflake";
+    snow.innerText = "❄";
+    snow.style.left = Math.random() * window.innerWidth + "px";
+    snow.style.fontSize = (10 + Math.random() * 10) + "px";
+    snow.style.opacity = Math.random();
+    document.body.appendChild(snow);
+
+    let fall = 0;
+    const speed = 1 + Math.random() * 2;
+
+    function animate(){
+        fall += speed;
+        snow.style.top = fall + "px";
+        if(fall > window.innerHeight){
+            snow.remove();
+        } else {
+            requestAnimationFrame(animate);
+        }
+    }
+    animate();
+}
+
+setInterval(createSnow, 200);
+</script>
+
+</body>
+</html>
