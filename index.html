@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Khushi ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:#0f172a; /* simple solid color */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+.container{
+    max-width:420px;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+.name{
+    font-size:22px;
+    color:#fda4af;
+    margin-bottom:15px;
+    animation: fade 3s infinite;
+}
+
+@keyframes fade{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+
+.slider-box{
+    margin-top:25px;
+}
+
+input[type=range]{
+    width:100%;
+}
+
+.game{
+    display:none;
+    margin-top:25px;
+}
+
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:25px;
+    background:#fb7185;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#f43f5e;
+}
+
+.message{
+    margin-top:20px;
+    font-size:18px;
+    min-height:60px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Ye meri pyari madam ji ke liye 💖</h1>
+<div class="name" id="name"></div>
+
+<div class="slider-box">
+    <p>Thoda slide karo ✨</p>
+    <input type="range" min="0" max="100" value="0" id="slider">
+</div>
+
+<div class="game" id="game">
+    <p>🎮 Mini Game (Tap ❤️)</p>
+    <button onclick="playGame()">Tap ❤️</button>
+    <div class="message" id="msg"></div>
+</div>
+
+</div>
+
+<script>
+const names = [
+ "Khushi Madam Ji 💖",
+ "Khushi Devi Ji 🙏",
+ "Sabr ka Fal 🍎❤️"
+];
+
+let nameIndex = 0;
+const nameBox = document.getElementById("name");
+
+setInterval(()=>{
+    nameBox.innerText = names[nameIndex];
+    nameIndex = (nameIndex + 1) % names.length;
+},3000);
+
+const slider = document.getElementById("slider");
+const game = document.getElementById("game");
+const msg = document.getElementById("msg");
+
+let points = 0;
+
+const messages = [
+ "Tumhari smile dekh ke din ban jata hai 😊",
+ "Khushi ho toh tum jaisi ho ❤️",
+ "Thoda sabr aur… magic aa raha hai ✨",
+ "Tum bahut special ho 💖",
+ "Bas ek step aur 🌸"
+];
+
+slider.oninput = () => {
+    if(slider.value >= 100){
+        game.style.display = "block";
+    }
+};
+
+function playGame(){
+    if(points < messages.length){
+        msg.innerText = messages[points];
+        points++;
+    } else {
+        msg.innerHTML =
+        "❤️ Thank You Khushi ❤️<br><br>" +
+        "Tum hamesha aise hi muskurati raho 😊<br>" +
+        "— Someone who cares 💕";
+    }
+}
+</script>
+
+</body>
+</html>
